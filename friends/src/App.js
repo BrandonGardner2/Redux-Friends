@@ -8,21 +8,23 @@ import FriendsView from "./views/FriendsView";
 import LogIn from "./views/LogIn";
 
 class App extends Component {
+  state = {
+    communicating: this.props.communicating,
+    authenticated: this.props.authneticated,
+    friends: this.props.friends,
+    error: this.props.error
+  };
   componentDidMount() {
     this.props.startLogin();
   }
 
   render() {
-    console.log(this.props);
+    if (this.props.communicating) {
+      return <Loading />;
+    }
     return (
       <div className="app">
-        {this.props.loading ? (
-          <Loading />
-        ) : this.props.authneticated ? (
-          <FriendsView />
-        ) : (
-          <LogIn />
-        )}
+        {this.props.authneticated ? <FriendsView /> : <LogIn />}
       </div>
     );
   }
