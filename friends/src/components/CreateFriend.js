@@ -6,7 +6,6 @@ const CreateFriend = props => {
   const nameRef = useRef();
   const ageRef = useRef();
   const emailRef = useRef();
-  const addFriendToDB = props.addFriendToDB;
 
   const handleSubmit = e => {
     e.preventDefault();

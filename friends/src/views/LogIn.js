@@ -12,7 +12,7 @@ const LogIn = props => {
     if (props.authenticated) {
       props.history.push("/friends");
     }
-  });
+  }, []);
 
   const sendLogin = e => {
     e.preventDefault();

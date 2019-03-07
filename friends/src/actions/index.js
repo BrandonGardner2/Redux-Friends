@@ -50,13 +50,14 @@ export const getFriends = () => dispatch => {
 
 export const addFriend = friend => dispatch => {
   dispatch({ type: ADD_FRIEND });
-  axiosAuth()
+  return axiosAuth()
     .post("http://localhost:5000/api/friends", friend)
     .then(res => {
       dispatch({ type: SUCCESS, payload: res.data });
     })
     .catch(err => {
       dispatch({ type: FAILURE, payload: err.response.error.data });
+      console.log(err);
     });
 };
 
