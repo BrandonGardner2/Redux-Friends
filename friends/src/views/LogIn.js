@@ -16,10 +16,14 @@ const LogIn = props => {
 
   const sendLogin = e => {
     e.preventDefault();
-    props.startLogin({
-      username,
-      password
-    });
+    props
+      .startLogin({
+        username,
+        password
+      })
+      .then(() => {
+        console.log("success");
+      });
   };
 
   return (

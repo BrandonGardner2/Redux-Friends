@@ -1,12 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { deleteFriend } from "../actions";
 
 const Friend = props => {
   const { name, age, email, id } = props.friend;
-  const { removeFriendFromDB } = props;
 
   const removeFriend = () => {
-    removeFriendFromDB(id);
+    props.deleteFriend(id);
   };
 
   if (!props.friend) {
@@ -27,9 +29,12 @@ const Friend = props => {
           Update Friend
         </NavLink>
       </button>
-      <button>Remove Friend</button>
+      <button onClick={removeFriend}>Remove Friend</button>
     </div>
   );
 };
 
-export default Friend;
+export default connect(
+  null,
+  { deleteFriend }
+)(Friend);

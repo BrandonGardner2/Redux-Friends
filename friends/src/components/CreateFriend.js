@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { connect } from "react-redux";
+import { addFriend } from "../actions";
 
 const CreateFriend = props => {
   const nameRef = useRef();
@@ -13,9 +15,15 @@ const CreateFriend = props => {
     const emailRefValue = emailRef.current.value;
 
     if (nameRefValue && ageRefValue !== 0 && emailRefValue) {
-      addFriendToDB(nameRefValue, Number(ageRefValue), emailRefValue)
-        .then(res => props.history.push("/"))
-        .catch(e => alert("Something went wrong..."));
+      const newFriend = {
+        name: nameRefValue,
+        age: Number(ageRefValue),
+        email: emailRefValue
+      };
+
+      props.addFriend(newFriend);
+      // .then(() => props.history.push("/"))
+      // .catch(e => alert("Something went wrong..."));
     } else {
       alert("Please fill out all of the fields!");
     }
@@ -31,4 +39,7 @@ const CreateFriend = props => {
   );
 };
 
-export default CreateFriend;
+export default connect(
+  null,
+  { addFriend }
+)(CreateFriend);

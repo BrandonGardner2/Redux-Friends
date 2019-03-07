@@ -27,8 +27,8 @@ export const checkAuth = () => dispatch => {
 export const startLogin = payload => dispatch => {
   dispatch({ type: START_LOGIN });
   return axios
-    .post("http://localhost:5000/api/login", payload)
-    .then(res => {
+    .post("http://localhost:5000/api/login/", payload)
+    .then(() => {
       dispatch({ type: LOGIN_SUCCESS });
     })
     .catch(err => {
@@ -51,35 +51,39 @@ export const getFriends = () => dispatch => {
 export const addFriend = friend => dispatch => {
   dispatch({ type: ADD_FRIEND });
   axiosAuth()
-    .post()
+    .post("http://localhost:5000/api/friends", friend)
     .then(res => {
-      dispatch({ type: SUCCESS });
+      dispatch({ type: SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: FAILURE });
+      dispatch({ type: FAILURE, payload: err.response.error.data });
     });
 };
 
 export const updateFriend = (id, friend) => dispatch => {
   dispatch({ type: UPDATE_FRIEND });
-  axiosAuth()
-    .put()
-    .then(res => {
-      dispatch({ type: SUCCESS });
-    })
-    .catch(err => {
-      dispatch({ type: FAILURE });
-    });
+  return new Promise((resolve, reject) => {
+    axiosAuth()
+      .put(`http://localhost:5000/api/friends/${id}/`, friend)
+      .then(res => {
+        dispatch({ type: SUCCESS, payload: res.data });
+        resolve();
+      })
+      .catch(err => {
+        dispatch({ type: FAILURE, payload: err.response.error.data });
+        reject();
+      });
+  });
 };
 
 export const deleteFriend = id => dispatch => {
   dispatch({ type: DELETE_FRIEND });
   axiosAuth()
-    .delete()
+    .delete(`http://localhost:5000/api/friends/${id}/`)
     .then(res => {
-      dispatch({ type: SUCCESS });
+      dispatch({ type: SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: FAILURE });
+      dispatch({ type: FAILURE, payload: err.response.error.data });
     });
 };
