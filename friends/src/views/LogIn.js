@@ -16,14 +16,13 @@ const LogIn = props => {
 
   const sendLogin = e => {
     e.preventDefault();
-    props
-      .startLogin({
-        username,
-        password
-      })
-      .then(() => {
-        console.log("success");
-      });
+    props.startLogin({
+      username,
+      password
+    });
+    // .then(() => {
+    //   props.history.push('/friends');
+    // });
   };
 
   return (

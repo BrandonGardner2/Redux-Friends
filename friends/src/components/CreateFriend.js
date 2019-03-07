@@ -21,8 +21,7 @@ const CreateFriend = props => {
       };
 
       props.addFriend(newFriend);
-      // .then(() => props.history.push("/"))
-      // .catch(e => alert("Something went wrong..."));
+      // .then(() => props.history.push("/friends"))
     } else {
       alert("Please fill out all of the fields!");
     }
