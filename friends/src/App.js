@@ -19,12 +19,6 @@ class App extends Component {
           <PrivateRoute path="/friends" component={FriendsView} />
           <Redirect from="*" to="/friends" />
         </Switch>
-
-        {/*{this.props.authenticated ? (
-           <FriendsView friends={this.props.friends} />
-         ) : (
-           <LogIn />
-         )}*/}
       </div>
     );
   }

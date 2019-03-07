@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosAuth from "../auth/";
 
 export const GET_FRIENDS = "GET_FRIENDS";
@@ -25,7 +26,7 @@ export const checkAuth = () => dispatch => {
 
 export const startLogin = payload => dispatch => {
   dispatch({ type: START_LOGIN });
-  return axiosAuth()
+  return axios
     .post("http://localhost:5000/api/login", payload)
     .then(res => {
       dispatch({ type: LOGIN_SUCCESS });
