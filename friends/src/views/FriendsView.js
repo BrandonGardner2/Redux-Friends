@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { getFriends } from "../actions";
 
 import Friend from "../components/Friend";
@@ -15,6 +16,9 @@ const FriendsView = props => {
   }
   return (
     <div className="friends-view">
+      <button>
+        <NavLink to="/friends/createfriend">Add Friend</NavLink>
+      </button>
       {props.friends &&
         props.friends.map(friend => {
           return <Friend key={friend.id} friend={friend} />;

@@ -32,8 +32,7 @@ export const startLogin = payload => dispatch => {
       dispatch({ type: LOGIN_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: LOGIN_FAILURE });
-      console.log(err.response);
+      dispatch({ type: LOGIN_FAILURE, payload: err.response.data.error });
     });
 };
 

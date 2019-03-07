@@ -47,7 +47,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         authenticated: false,
-        communicating: false
+        communicating: false,
+        error: action.payload
       };
     case GET_FRIENDS:
       return {
