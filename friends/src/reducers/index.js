@@ -41,8 +41,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         friends: action.payload,
-        communicating: true,
-        authenticated: true
+        communicating: true
       };
     case UPDATE_FRIEND:
       return {
@@ -63,6 +62,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         communicating: false,
+        authenticated: true,
         friends: action.payload,
         error: ""
       };

@@ -16,6 +16,7 @@ export const startLogin = payload => dispatch => {
     .post("http://localhost:5000/api/login", payload)
     .then(res => {
       dispatch({ type: LOGIN_SUCCESS });
+      dispatch(getFriends());
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILURE });
