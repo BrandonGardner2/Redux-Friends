@@ -3,6 +3,8 @@ import {
   UPDATE_FRIEND,
   ADD_FRIEND,
   DELETE_FRIEND,
+  AUTH_SUCCESS,
+  AUTH_FAIL,
   START_LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -19,6 +21,16 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        authenticated: true
+      };
+    case AUTH_FAIL:
+      return {
+        ...state,
+        authenticated: false
+      };
     case START_LOGIN:
       return {
         ...state,

@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { startLogin } from "../actions";
+import { startLogin, checkAuth } from "../actions";
 
 const LogIn = props => {
   const [username, updateUsername] = useState("");
   const [password, updatePassword] = useState("");
+
+  useEffect(() => {
+    props.checkAuth();
+    if (props.authenticated) {
+      props.history.push("/friends");
+    }
+  });
 
   const sendLogin = e => {
     e.preventDefault();
@@ -31,7 +38,13 @@ const LogIn = props => {
   );
 };
 
+const mapStateToProps = ({ authenticated, communicating, error }) => ({
+  authenticated,
+  communicating,
+  error
+});
+
 export default connect(
-  null,
-  { startLogin }
+  mapStateToProps,
+  { startLogin, checkAuth }
 )(LogIn);

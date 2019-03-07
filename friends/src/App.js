@@ -1,44 +1,33 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { startLogin, getFriends } from "./actions/index";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import "./App.css";
-import Loading from "./views/Loading";
+import PrivateRoute from "./components/PrivateRoute";
 import FriendsView from "./views/FriendsView";
 import LogIn from "./views/LogIn";
 
 class App extends Component {
-  componentDidMount() {
-    this.props.getFriends();
-  }
-
   render() {
-    if (this.props.communicating) {
-      return <Loading />;
-    }
     return (
       <div className="app">
         {this.props.error && (
           <div className="error-msg">{this.props.error}</div>
         )}
-        {this.props.authenticated ? (
-          <FriendsView friends={this.props.friends} />
-        ) : (
-          <LogIn />
-        )}
+
+        <Switch>
+          <Route path="/login" component={LogIn} />
+          <PrivateRoute path="/friends" component={FriendsView} />
+          <Redirect from="*" to="/friends" />
+        </Switch>
+
+        {/*{this.props.authenticated ? (
+           <FriendsView friends={this.props.friends} />
+         ) : (
+           <LogIn />
+         )}*/}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ authenticated, communicating, error, friends }) => ({
-  authenticated,
-  communicating,
-  error,
-  friends
-});
-
-export default connect(
-  mapStateToProps,
-  { startLogin, getFriends }
-)(App);
+export default App;
