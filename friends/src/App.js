@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { startLogin } from "./actions/index";
+import { startLogin, getFriends } from "./actions/index";
 
 import "./App.css";
 import Loading from "./views/Loading";
@@ -8,14 +8,8 @@ import FriendsView from "./views/FriendsView";
 import LogIn from "./views/LogIn";
 
 class App extends Component {
-  state = {
-    communicating: this.props.communicating,
-    authenticated: this.props.authneticated,
-    friends: this.props.friends,
-    error: this.props.error
-  };
   componentDidMount() {
-    this.props.startLogin();
+    this.props.getFriends();
   }
 
   render() {
@@ -24,7 +18,14 @@ class App extends Component {
     }
     return (
       <div className="app">
-        {this.props.authneticated ? <FriendsView /> : <LogIn />}
+        {this.props.error && (
+          <div className="error-msg">{this.props.error}</div>
+        )}
+        {this.props.authenticated ? (
+          <FriendsView friends={this.props.friends} />
+        ) : (
+          <LogIn />
+        )}
       </div>
     );
   }
@@ -39,5 +40,5 @@ const mapStateToProps = ({ authenticated, communicating, error, friends }) => ({
 
 export default connect(
   mapStateToProps,
-  { startLogin }
+  { startLogin, getFriends }
 )(App);

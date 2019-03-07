@@ -28,7 +28,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         authenticated: true,
-        communicating: false
+        communicating: false,
+        error: ""
       };
     case LOGIN_FAILURE:
       return {
@@ -39,7 +40,9 @@ export default (state = initialState, action) => {
     case GET_FRIENDS:
       return {
         ...state,
-        communicating: true
+        friends: action.payload,
+        communicating: true,
+        authenticated: true
       };
     case UPDATE_FRIEND:
       return {
@@ -60,7 +63,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         communicating: false,
-        friends: action.payload
+        friends: action.payload,
+        error: ""
       };
     case FAILURE:
       return {
