@@ -8,25 +8,28 @@ const LogIn = props => {
   const [password, updatePassword] = useState("");
 
   useEffect(() => {
-    props.checkAuth();
-    if (props.authenticated) {
-      props.history.push("/friends");
-    }
-  }, []);
+    // props.checkAuth();
+    // if (props.authenticated) {
+    //   props.history.push("/friends");
+    // }
+  });
+
+  console.log(props.startLogin);
 
   const sendLogin = e => {
     e.preventDefault();
-    props.startLogin({
-      username,
-      password
-    });
-    // .then(() => {
-    //   props.history.push('/friends');
-    // });
+    props
+      .startLogin({
+        username,
+        password
+      })
+      .then(() => {
+        props.history.push("/friends");
+      });
   };
 
   return (
-    <form onSubmit={e => sendLogin(e)} className="login-view">
+    <form onSubmit={sendLogin} className="login-view">
       <input
         placeholder="Username"
         onChange={e => updateUsername(e.target.value)}

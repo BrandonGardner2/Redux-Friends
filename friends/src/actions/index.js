@@ -28,8 +28,8 @@ export const startLogin = payload => dispatch => {
   dispatch({ type: START_LOGIN });
   return axios
     .post("http://localhost:5000/api/login/", payload)
-    .then(() => {
-      dispatch({ type: LOGIN_SUCCESS });
+    .then(res => {
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload });
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILURE, payload: err.response.data.error });
