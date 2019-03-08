@@ -8,13 +8,11 @@ const LogIn = props => {
   const [password, updatePassword] = useState("");
 
   useEffect(() => {
-    // props.checkAuth();
-    // if (props.authenticated) {
-    //   props.history.push("/friends");
-    // }
+    props.checkAuth();
+    if (props.authenticated) {
+      props.history.push("/friends");
+    }
   });
-
-  console.log(props.startLogin);
 
   const sendLogin = e => {
     e.preventDefault();

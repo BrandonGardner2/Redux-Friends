@@ -28,8 +28,9 @@ const UpdateFriend = props => {
     };
 
     if (nameRefValue && ageRefValue !== 0 && emailRefValue) {
-      props.updateFriend(id, newFriend);
-      // .then(() => props.history.push("/friends"));
+      props
+        .updateFriend(id, newFriend)
+        .then(() => props.history.push("/friends"));
     } else {
       alert("Please fill out all of the fields!");
     }

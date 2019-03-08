@@ -20,8 +20,7 @@ const CreateFriend = props => {
         email: emailRefValue
       };
 
-      props.addFriend(newFriend);
-      // .then(() => props.history.push("/friends"))
+      props.addFriend(newFriend).then(() => props.history.push("/friends"));
     } else {
       alert("Please fill out all of the fields!");
     }

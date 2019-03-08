@@ -13,7 +13,7 @@ import reducer from "./reducers";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
-  composeEnhancers(applyMiddleware(customMiddleware, thunk))
+  composeEnhancers(applyMiddleware(thunk, customMiddleware))
 );
 
 ReactDOM.render(
